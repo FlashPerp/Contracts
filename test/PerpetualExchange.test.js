@@ -141,9 +141,20 @@ describe("Perpetual Exchange System", function () {
 
     it("Should allow opening a long position", async function () {
       // Open a long position
-      const collateralAmount = ethers.parseUnits("1000", 6); // 1,000 USDC
       const size = ethers.parseUnits("1", 8); // 1 ETH
       const leverage = 3; // 3x leverage
+      
+      // Get the current ETH price to calculate the proper collateral amount
+      const ethPrice = await priceOracle.getPrice(ETH_USD);
+      
+      // Calculate notional value (size * price)
+      const notionalValue = (size * ethPrice) / BigInt(10**8);
+      
+      // Required collateral = notional value / leverage
+      const requiredCollateral = notionalValue / BigInt(leverage);
+      
+      // Add a buffer to ensure we have enough collateral (10% more)
+      const collateralAmount = requiredCollateral + (requiredCollateral * BigInt(10)) / BigInt(100);
       const maxFundingRate = 1000; // 10% in basis points
       const slippageTolerance = 100; // 1% in basis points
 
@@ -174,9 +185,20 @@ describe("Perpetual Exchange System", function () {
 
     it("Should allow closing a position", async function () {
       // Open a position first
-      const collateralAmount = ethers.parseUnits("1000", 6); // 1,000 USDC
       const size = ethers.parseUnits("1", 8); // 1 ETH
       const leverage = 3; // 3x leverage
+      
+      // Get the current ETH price to calculate the proper collateral amount
+      const ethPrice = await priceOracle.getPrice(ETH_USD);
+      
+      // Calculate notional value (size * price)
+      const notionalValue = (size * ethPrice) / BigInt(10**8);
+      
+      // Required collateral = notional value / leverage
+      const requiredCollateral = notionalValue / BigInt(leverage);
+      
+      // Add a buffer to ensure we have enough collateral (10% more)
+      const collateralAmount = requiredCollateral + (requiredCollateral * BigInt(10)) / BigInt(100);
       const maxFundingRate = 1000; // 10% in basis points
       const slippageTolerance = 100; // 1% in basis points
 
