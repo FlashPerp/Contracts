@@ -18,7 +18,7 @@ interface IPerpetualExchangeCore {
         uint256 size;            // Size of the position (in units of the underlying asset)
         uint256 entryPrice;      // Average entry price of the position
         uint256 lastFundingTimestamp; // Timestamp of the last funding payment
-        uint256 accumulatedFunding;  // Accumulated funding owed (positive or negative)
+        int256 accumulatedFunding;  // Accumulated funding owed (positive or negative)
         uint256 leverage;        // The leverage
     }
     

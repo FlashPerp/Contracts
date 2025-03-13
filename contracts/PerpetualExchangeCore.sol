@@ -6,8 +6,8 @@ import "./interfaces/IPriceOracle.sol";
 import "./interfaces/IAssetRegistry.sol";
 import "./libraries/PerpMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 /**
  * @title PerpetualExchangeCore
